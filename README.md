@@ -51,7 +51,7 @@
 
 [Z3ratu1/geacon_plus](https://github.com/Z3ratu1/geacon_plus)
 
-[CobaltStrike beacon二开指南 | Z3ratu1's blog](https://blog.z3ratu1.top/CobaltStrike beacon二开指南.html)
+[CobaltStrike beacon二开指南 | Z3ratu1's blog](https://blog.z3ratu1.top/CobaltStrike%20beacon二开指南.html)
 
 [mai1zhi2/SharpBeacon](https://github.com/mai1zhi2/SharpBeacon)
 
