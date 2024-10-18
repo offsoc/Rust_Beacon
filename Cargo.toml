@@ -1,0 +1,50 @@
+[package]
+name = "beacon-rust"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[profile.release]
+opt-level = "z"     # Optimize for size.
+lto = true          # Enable Link Time Optimization
+codegen-units = 1   # Reduce number of codegen units to increase optimizations.
+panic = "abort"     # Abort on panic
+strip = true        # Automatically strip symbols from the binary.
+
+
+
+[dependencies]
+reqwest = { version ="0.11.12", features = ["blocking", "cookies"] }
+bytes = "1.2.1"
+sha2 = "0.10.6"
+hexdump = "0.1.1"
+rsa = "0.7.0"
+rand = "*"
+base64 = "0.13.0"
+rust-crypto = "^0.2"
+byteorder = "1"
+anyhow = "1.0"
+hex = "0.4.3"
+hmac = "0.12.1"
+local-ip-address = "0.4"
+encoding_rs = "0.8.9"
+windows-sys = { version = "0.59.0", features = ["Win32_UI", "Win32_UI_Shell", "Win32_System_SystemInformation", "Win32_Globalization", "Win32_System_LibraryLoader", "Win32_System_Threading", "Win32_System_Memory", "Win32_Security", "Win32_Storage", "Win32_Storage_FileSystem", "Win32_System_Pipes", "Win32_System_IO", "Win32_System_RemoteDesktop", "Win32_Security_Authorization", "Win32_System_Diagnostics", "Win32_System_Diagnostics_Debug"] }
+tracing = "0.1.40"
+windows = { version = "0.56.0", features = [
+    "Win32_Foundation",
+    "Win32_System_Memory",
+    "Win32_System_SystemServices",
+    "Win32_System_LibraryLoader",
+    "Win32_System_Threading",
+    "Win32_Security",
+    "Win32_System_Diagnostics_Debug",
+] }
+printf-compat = "0.1.1"
+chrono = "0.4.38"
+sysinfo = "0.31.4"
+tokio = "1.39.2"
+lazy_static = "1.5.0"
+
+
+
