@@ -1,6 +1,8 @@
 # Rust-Beacon
 
-使用 rust 实现的 CobaltStrike 的 beacon。
+使用 rust 实现的 CobaltStrike 的 beacon
+
+Using Rust to implement CobaltStrike's Beacon
 
 *本项目仅供学习协议分析和逆向工程使用，如有侵犯他人权益，请联系我删除该项目，请勿非法使用*
 
