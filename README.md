@@ -86,7 +86,7 @@ Thanks to the following projects and articles:
 
 - [b1tg/cobaltstrike-beacon-rust](https://github.com/b1tg/cobaltstrike-beacon-rust)
 - [Z3ratu1/geacon_plus](https://github.com/Z3ratu1/geacon_plus)
-- [CobaltStrike beacon 二开指南 | Z3ratu1's blog](https://blog.z3ratu1.top/CobaltStrike beacon二开指南.html)
+- [CobaltStrike beacon二开指南 | Z3ratu1's blog](https://blog.z3ratu1.top/CobaltStrike%20beacon二开指南.html)
 - [mai1zhi2/SharpBeacon](https://github.com/mai1zhi2/SharpBeacon)
 - [魔改 CobaltStrike：重写 Stager 和 Beacon-编程技术](https://bbs.kanxue.com/thread-269115.htm#msg_header_h2_0)
 - [hakaioffsec/coffee](https://github.com/hakaioffsec/coffee)
