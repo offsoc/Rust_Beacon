@@ -4,8 +4,6 @@
 
 *本项目仅供学习协议分析和逆向工程使用，如有侵犯他人权益，请联系我删除该项目，请勿非法使用。*
 
-*本项目未作任何免杀处理，这也不是本项目开源的目的，因此请不要提相关 issue。*
-
 This project is implemented in Rust for CobaltStrike's beacon. It is intended for educational purposes only, such as protocol analysis and reverse engineering. If this project infringes on any rights, please contact me to remove it. Do not use it illegally.
 
 ## Features ✨
