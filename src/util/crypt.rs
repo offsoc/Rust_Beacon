@@ -9,6 +9,8 @@ use hmac::{Hmac, Mac};
 use sha2::Sha256;
 type HmacSha256 = Hmac<Sha256>;
 
+use crate::config::AES_IV;
+
 /// hmacSha256, only use first 16 bytes
 pub fn hmac_hash(key: &[u8], input: &[u8]) -> [u8; 16] {
     let mut mac = HmacSha256::new_from_slice(key).expect("HMAC can take key of any size");
@@ -69,7 +71,7 @@ pub fn aes_decrypt(
 #[test]
 fn test_aes_encrypt() {
     let key = b"abcdefghijklmnop";
-    let iv = b"abcdefghijklmnop";
+    let iv = AES_IV;
     let output_encrypt = aes_encrypt("ABC".as_bytes(), key, iv).unwrap();
     assert_eq!(
         output_encrypt,
@@ -129,7 +131,7 @@ pub fn aes_encrypt(
 
 #[allow(dead_code)]
 fn reply_pkg(data: &[u8]) -> Vec<u8> {
-    let iv = b"abcdefghijklmnop";
+    let iv = AES_IV;
     let aes_key = b"abcdefghijklmnop";
     let hmac_key = b"";
     let counter = 1u32;

