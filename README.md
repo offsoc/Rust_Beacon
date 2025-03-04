@@ -6,10 +6,12 @@
 
 This project is implemented in Rust for CobaltStrike's beacon. It is intended for educational purposes only, such as protocol analysis and reverse engineering. If this project infringes on any rights, please contact me to remove it. Do not use it illegally.
 
+
 ## Features ✨
 
 目前实现了以下功能：
 
+- http/https 通信
 - 命令执行
 - 文件管理
 - 进程管理
@@ -22,6 +24,7 @@ This project is implemented in Rust for CobaltStrike's beacon. It is intended fo
 
 Currently implemented features:
 
+- HTTP/HTTPS communication
 - Command execution
 - File management
 - Process management
@@ -31,6 +34,18 @@ Currently implemented features:
 - BOF memory loading
 
 Some features may have bugs. Feel free to submit issues for feedback.
+
+## 环境要求 🔧
+
+- Rust 工具链 (推荐使用 nightly-x86_64-pc-windows-gnu)
+- Python 3.x (用于密钥提取)
+- CobaltStrike 4.x
+
+Environment Requirements:
+
+- Rust toolchain (recommended: nightly-x86_64-pc-windows-gnu)
+- Python 3.x (for key extraction)
+- CobaltStrike 4.x
 
 ## Usage 🛠️
 
@@ -49,12 +64,12 @@ Place the obtained public key in `src/config/mod.rs`.
 
 ![image-20241018145236841](images/image-20241018145236841.png)
 
-##### Step 2
+### Step 2
 
 在`src/config/mod.rs`处填写自定义内容，如server端 ip，端口等
 Fill in custom content in `src/config/mod.rs`, such as server IP, port, etc.
 
-##### Step 3
+### Step 3
 
 编译项目
 Compile the project:
@@ -90,7 +105,6 @@ Thanks to the following projects and articles:
 - [hakaioffsec/coffee](https://github.com/hakaioffsec/coffee)
 - [Cobalt Strike BOF 原理分析](https://tttang.com/archive/1786/)
 - [WBGlIl/ReBeacon_Src](https://github.com/WBGlIl/ReBeacon_Src)
-
 
 ## 免责声明
 

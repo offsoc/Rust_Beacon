@@ -8,7 +8,7 @@ use std::io::Cursor;
 use std::sync::Mutex;
 
 lazy_static! {
-    static ref GLOBAL_VAR_SLEEP: Mutex<i32> = Mutex::new(30000); // 定义全局变量
+    static ref GLOBAL_VAR_SLEEP: Mutex<i32> = Mutex::new(3000); // 定义全局变量
     static ref GLOBAL_VAR_JITTER: Mutex<i32> = Mutex::new(0); // 定义全局变量
 }
 

