@@ -60,6 +60,7 @@ First, locate your `.cobaltstrike.beacon_keys` file and place it in the same dir
 ![image-20241018145017907](images/image-20241018145017907.png)
 
 将得到的 public key 放到 `src/config/mod.rs` 处即可
+
 Place the obtained public key in `src/config/mod.rs`.
 
 ![image-20241018145236841](images/image-20241018145236841.png)
@@ -67,16 +68,19 @@ Place the obtained public key in `src/config/mod.rs`.
 ### Step 2
 
 在`src/config/mod.rs`处填写自定义内容，如server端 ip，端口等
+
 Fill in custom content in `src/config/mod.rs`, such as server IP, port, etc.
 
 ### Step 3
 
 编译项目
+
 Compile the project:
 
 `cargo build --release`
 
 测试时工具链使用的是`nightly-x86_64-pc-windows-gnu`
+
 The toolchain used for testing is `nightly-x86_64-pc-windows-gnu`.
 
 ## ToDo 📋
