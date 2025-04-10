@@ -19,7 +19,7 @@ reqwest = { version ="0.11.12", features = ["blocking", "cookies"] }
 bytes = "1.2.1"
 sha2 = "0.10.6"
 hexdump = "0.1.1"
-rsa = "0.7.0"
+rsa = "0.9.7"
 rand = "*"
 base64 = "0.13.0"
 rust-crypto = "^0.2"
@@ -44,7 +44,7 @@ windows = { version = "0.56.0", features = [
 printf-compat = "0.1.1"
 chrono = "0.4.38"
 sysinfo = "0.31.4"
-tokio = "1.39.2"
+tokio = "1.43.1"
 lazy_static = "1.5.0"
 url = "2.2"
 
